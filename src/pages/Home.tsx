@@ -1,8 +1,10 @@
 import "../assets/css/index.css";
-import Navbar from "../components/Navbar.tsx";
 import { Link } from "react-router-dom";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 import { useParallax } from "../hooks/useParallax";
+
+import Navbar from "../components/Navbar.tsx";
+import Button from "../components/Button.tsx";
 
 function Home() {
   // Parallax effect for hero section
@@ -21,7 +23,7 @@ function Home() {
     <div className="min-h-screen bg-gray-100">
       <Navbar />
 
-      {/* Hero Section - Balanced Modern Professional */}
+      {/* Hero Section*/}
       <section className="relative w-full h-[calc(100vh-4rem)] overflow-hidden">
         {/* Parallax Background Image */}
         <div
@@ -49,7 +51,7 @@ function Home() {
           </nav>
         </div>
 
-        {/* Main Content - Center */}
+        {/* Main Content*/}
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-24">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white drop-shadow-2xl mb-6 tracking-tight animate-fadeInUp">
             Municipality of Tuy, Batangas
@@ -320,13 +322,10 @@ function Home() {
           <div
             className={`text-center scroll-animate stagger-5 ${factsRef.isVisible ? "visible" : ""}`}
           >
-            <Link
-              to="/about"
-              className="inline-block bg-transparent border-2 border-primary text-primary px-6 py-3 rounded-lg font-semibold hover:border-primary hover:text-white hover:bg-primary transition-all shadow-sm hover:shadow-lg"
-            >
-              <i className="fa-solid fa-circle-info me-2"></i>Learn More About
+            <Button variant="outline" to="/about" hasShadow={true}>
+              <i className="fa-solid fa-circle-info mr-2"></i>Learn More About
               Tuy
-            </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -443,12 +442,10 @@ function Home() {
           <div
             className={`text-center mt-12 scroll-animate stagger-4 ${announcementsRef.isVisible ? "visible" : ""}`}
           >
-            <a
-              href="#"
-              className="inline-block bg-white text-primary border-2 border-primary px-8 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors shadow-sm hover:shadow-lg"
-            >
-              View All Announcements
-            </a>
+            <Button variant="outline" to="/announcements" hasShadow={true}>
+              <i className="fa-solid fa-bullhorn mr-2"></i>View All
+              Announcements
+            </Button>
           </div>
         </div>
       </section>
@@ -582,16 +579,16 @@ function Home() {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             {/* Gallery Preview */}
             <div
-              className={`bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-8 flex flex-col h-full scroll-animate-left ${exploreRef.isVisible ? "visible" : ""}`}
+              className={`md:col-span-2 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-8 flex flex-col h-full scroll-animate-left ${exploreRef.isVisible ? "visible" : ""}`}
             >
               <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
                 <i className="fas fa-images text-primary mr-3"></i>
                 Photo Gallery
               </h3>
-              <div className="grid grid-cols-3 sm:grid-cols-3 gap-4 mb-6 flex-grow">
+              <div className="grid grid-cols-3 md:grid-cols-4 gap-4 mb-6 flex-grow">
                 <div className="aspect-square bg-gradient-to-br from-primary/20 to-primary/10 rounded-lg flex items-center justify-center cursor-pointer hover:scale-105 hover:shadow-lg transition-all duration-300">
                   <i className="fas fa-image text-4xl text-primary/40"></i>
                 </div>
@@ -610,13 +607,16 @@ function Home() {
                 <div className="aspect-square bg-gradient-to-br from-primary/15 to-primary/25 rounded-lg flex items-center justify-center cursor-pointer hover:scale-105 hover:shadow-lg transition-all duration-300">
                   <i className="fas fa-image text-4xl text-primary/40"></i>
                 </div>
+                <div className="aspect-square bg-gradient-to-br from-primary/18 to-primary/12 rounded-lg flex items-center justify-center cursor-pointer hover:scale-105 hover:shadow-lg transition-all duration-300">
+                  <i className="fas fa-image text-4xl text-primary/40"></i>
+                </div>
+                <div className="aspect-square bg-gradient-to-br from-primary/22 to-primary/8 rounded-lg flex items-center justify-center cursor-pointer hover:scale-105 hover:shadow-lg transition-all duration-300">
+                  <i className="fas fa-image text-4xl text-primary/40"></i>
+                </div>
               </div>
-              <Link
-                to="/gallery"
-                className="block text-center bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-hover transition-all duration-300 hover:shadow-md"
-              >
-                Explore Our Gallery
-              </Link>
+              <Button variant="primary" fullWidth={true} to="/gallery">
+                <i className="fa-solid fa-image mr-2"></i>Explore Our Gallery
+              </Button>
             </div>
 
             {/* Tourist Attractions */}
@@ -673,12 +673,9 @@ function Home() {
                   </div>
                 </li>
               </ul>
-              <Link
-                to="/about"
-                className="block text-center bg-white text-primary border-2 border-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-all duration-300 hover:shadow-md"
-              >
-                Learn More
-              </Link>
+              <Button variant="outline" to="/about" fullWidth={true}>
+                <i className="fa-solid fa-location-dot mr-2"></i>Visit Now
+              </Button>
             </div>
           </div>
         </div>
@@ -738,12 +735,9 @@ function Home() {
           <div
             className={`text-center scroll-animate stagger-4 ${contactRef.isVisible ? "visible" : ""}`}
           >
-            <Link
-              to="/contact"
-              className="inline-block bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg"
-            >
+            <Button variant="secondary" size="lg" to="/contact" hasShadow>
               Contact Us
-            </Link>
+            </Button>
           </div>
         </div>
       </section>
