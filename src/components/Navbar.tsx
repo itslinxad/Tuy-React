@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import { searchableContent } from "../data/searchData";
 import type { SearchItem } from "../data/searchData";
 
@@ -20,9 +21,10 @@ const Navbar = () => {
   const debounceTimerRef = useRef<number | null>(null);
 
   const navigate = useNavigate();
+  const { logout, isAuthenticated } = useAuth();
 
   // Check if in dev mode
-  const isDevMode = window.location.pathname.startsWith('/dev/');
+  const isDevMode = isAuthenticated;
 
   // Search function
   const performSearch = (query: string): SearchItem[] => {
@@ -184,7 +186,7 @@ const Navbar = () => {
 
             {/* Desktop Menu Items */}
             <ul
-              className={`flex-row items-center justify-center text-white h-full ml-42 transition-opacity duration-300 ${
+              className={`flex-row text-sm items-center justify-center text-white h-full ml-42 transition-opacity duration-300 ${
                 isSearchOpen ? "hidden" : "hidden lg:flex"
               }`}
             >
@@ -356,23 +358,21 @@ const Navbar = () => {
             {/* Dev Mode Indicator & Logout (only show if in dev mode) */}
             {isDevMode && (
               <>
-                {/* Dev Mode Badge */}
-                <div className="hidden md:flex items-center gap-2 px-4 h-full bg-blue-600/20 border-l border-r border-blue-400/30">
-                  <i className="fas fa-code text-blue-300 text-sm"></i>
-                  <span className="text-xs font-semibold text-blue-100 uppercase tracking-wide">
-                    Developer Mode
-                  </span>
-                </div>
-                
-                {/* Logout Button */}
-                <a
-                  href="/dev/logout.php"
-                  className="px-4 xl:px-6 h-full flex items-center gap-2 bg-red-600/80 hover:bg-red-600 transition-all duration-150 cursor-pointer"
+                {/* Logout Button - React Auth */}
+                <button
+                  onClick={() => {
+                    logout();
+                    navigate("/login");
+                  }}
+                  className="px-4 xl:px-6 h-full flex items-center gap-2 bg-red-600/80 hover:bg-red-600 transition-all duration-150 cursor-pointer border-0"
                   aria-label="Logout from developer mode"
+                  type="button"
                 >
                   <i className="fas fa-sign-out-alt text-sm"></i>
-                  <span className="hidden lg:inline text-sm font-medium">Logout</span>
-                </a>
+                  <span className="hidden lg:inline text-sm font-medium">
+                    Logout
+                  </span>
+                </button>
               </>
             )}
 

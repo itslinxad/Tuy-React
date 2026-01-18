@@ -1,6 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext.tsx";
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
+import Login from "./pages/Login.tsx";
 import Home from "./pages/Home.tsx";
 import About from "./pages/About.tsx";
 import History from "./pages/profile/History.tsx";
@@ -22,55 +25,169 @@ import ContactUs from "./pages/ContactUs.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter basename="/dev">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
+    <AuthProvider>
+      <BrowserRouter basename="/dev">
+        <Routes>
+          {/* Public Route - Login */}
+          <Route path="/login" element={<Login />} />
 
-        {/* Profile Routes */}
-        <Route path="/profile/history" element={<History />} />
-        <Route path="/profile/demography" element={<Demography />} />
-        <Route path="/profile/maps" element={<Maps />} />
-        <Route path="/profile/socio-economic" element={<SocioEconomic />} />
+          {/* Protected Routes */}
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <ProtectedRoute>
+                <About />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Local Government Routes */}
-        <Route path="/government/officials" element={<Officials />} />
-        <Route
-          path="/government/department-heads"
-          element={<DepartmentHeads />}
-        />
-        <Route
-          path="/government/barangay-officials"
-          element={<BarangayOfficials />}
-        />
+          {/* Profile Routes */}
+          <Route
+            path="/profile/history"
+            element={
+              <ProtectedRoute>
+                <History />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile/demography"
+            element={
+              <ProtectedRoute>
+                <Demography />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile/maps"
+            element={
+              <ProtectedRoute>
+                <Maps />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile/socio-economic"
+            element={
+              <ProtectedRoute>
+                <SocioEconomic />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Transparencies Routes */}
-        <Route
-          path="/transparencies/accomplishment-reports"
-          element={<AccomplishmentReports />}
-        />
-        <Route
-          path="/transparencies/citizens-charter"
-          element={<CitizensCharter />}
-        />
-        <Route
-          path="/transparencies/financial-statements"
-          element={<FinancialStatements />}
-        />
-        <Route
-          path="/transparencies/invitation-to-bid"
-          element={<InvitationToBid />}
-        />
+          {/* Local Government Routes */}
+          <Route
+            path="/government/officials"
+            element={
+              <ProtectedRoute>
+                <Officials />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/government/department-heads"
+            element={
+              <ProtectedRoute>
+                <DepartmentHeads />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/government/barangay-officials"
+            element={
+              <ProtectedRoute>
+                <BarangayOfficials />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Downloadables Routes */}
-        <Route path="/downloadables/forms" element={<Forms />} />
-        <Route path="/downloadables/resolutions" element={<Resolutions />} />
-        <Route path="/downloadables/ordinances" element={<Ordinances />} />
+          {/* Transparencies Routes */}
+          <Route
+            path="/transparencies/accomplishment-reports"
+            element={
+              <ProtectedRoute>
+                <AccomplishmentReports />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/transparencies/citizens-charter"
+            element={
+              <ProtectedRoute>
+                <CitizensCharter />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/transparencies/financial-statements"
+            element={
+              <ProtectedRoute>
+                <FinancialStatements />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/transparencies/invitation-to-bid"
+            element={
+              <ProtectedRoute>
+                <InvitationToBid />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Other Routes */}
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/contact" element={<ContactUs />} />
-      </Routes>
-    </BrowserRouter>
+          {/* Downloadables Routes */}
+          <Route
+            path="/downloadables/forms"
+            element={
+              <ProtectedRoute>
+                <Forms />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/downloadables/resolutions"
+            element={
+              <ProtectedRoute>
+                <Resolutions />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/downloadables/ordinances"
+            element={
+              <ProtectedRoute>
+                <Ordinances />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Other Routes */}
+          <Route
+            path="/gallery"
+            element={
+              <ProtectedRoute>
+                <Gallery />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <ProtectedRoute>
+                <ContactUs />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   </StrictMode>,
 );

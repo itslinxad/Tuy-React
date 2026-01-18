@@ -1,0 +1,67 @@
+# ============================================
+# ROOT .HTACCESS FILE
+# Location: public_html/.htaccess
+# Domain: https://www.tuybatangas.gov.ph/
+# ============================================
+# This file handles:
+# - HTTPS redirect (force SSL)
+# - WWW redirect (force www prefix)
+# - Serve under-construction.html at root
+# - Allow /dev/ subfolder for React app
+# ============================================
+
+# Enable Rewrite Engine
+RewriteEngine On
+
+# ============================================
+# 1. FORCE HTTPS (Redirect HTTP to HTTPS)
+# ============================================
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ============================================
+# 2. FORCE WWW (Redirect non-www to www)
+# ============================================
+RewriteCond %{HTTP_HOST} ^tuybatangas\.gov\.ph$ [NC]
+RewriteRule ^(.*)$ https://www.tuybatangas.gov.ph/$1 [L,R=301]
+
+# ============================================
+# 3. SERVE UNDER-CONSTRUCTION AT ROOT
+# ============================================
+# When accessing the root URL (/), serve under-construction.html
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule ^$ /under-construction.html [L]
+
+# ============================================
+# 4. ALLOW /dev/ SUBFOLDER TO HANDLE ITS OWN ROUTING
+# ============================================
+# The /dev/ folder has its own .htaccess for React Router
+# This prevents root .htaccess from interfering with /dev/ routes
+
+# ============================================
+# 5. SECURITY HEADERS (Optional but recommended)
+# ============================================
+<IfModule mod_headers.c>
+    # Prevent clickjacking
+    Header set X-Frame-Options "SAMEORIGIN"
+    
+    # Prevent MIME type sniffing
+    Header set X-Content-Type-Options "nosniff"
+    
+    # Enable XSS protection
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# ============================================
+# 6. DISABLE DIRECTORY LISTING
+# ============================================
+Options -Indexes
+
+# ============================================
+# 7. DEFAULT DOCUMENT ORDER
+# ============================================
+DirectoryIndex index.html index.php
+
+# ============================================
+# END OF ROOT .HTACCESS
+# ============================================
