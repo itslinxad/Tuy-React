@@ -7,22 +7,15 @@ import { useParallax } from "../hooks/useParallax";
 import Navbar from "../components/Navbar.tsx";
 import Button from "../components/Button.tsx";
 import SkeletonCard from "../components/SkeletonCard";
-import { FACEBOOK_PAGE_URL } from "../data/facebookPosts";
 import { formatDate } from "../utils/dateFormat";
 import { useFacebookPosts } from "../hooks/useFacebookPosts";
 
 function Home() {
-  // Parallax effect for hero section
   const { offset } = useParallax({ speed: 0.3 });
-
-  // Fetch Facebook posts dynamically
   const { posts, loading } = useFacebookPosts();
-
-  // Carousel state and ref for horizontal scrolling
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Scroll to specific card
   const scrollToCard = (index: number) => {
     const container = scrollContainerRef.current;
     if (!container) return;
@@ -38,7 +31,6 @@ function Home() {
     }
   };
 
-  // Arrow navigation
   const scrollPrev = () => {
     const newIndex = Math.max(0, activeIndex - 1);
     scrollToCard(newIndex);
@@ -49,7 +41,6 @@ function Home() {
     scrollToCard(newIndex);
   };
 
-  // Track active card on scroll
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container || posts.length === 0) return;
@@ -65,7 +56,6 @@ function Home() {
     return () => container.removeEventListener("scroll", handleScroll);
   }, [posts.length]);
 
-  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft") scrollPrev();
@@ -76,36 +66,30 @@ function Home() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [activeIndex, posts.length]);
 
-  // Center first card in carousel on initial mount only (no page scroll)
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
-    // Wait for DOM to be fully ready and rendered
     const timer = setTimeout(() => {
       const firstCard = container.children[0] as HTMLElement;
       if (!firstCard) return;
 
-      // Calculate perfect center position
       const containerWidth = container.clientWidth;
       const cardWidth = firstCard.offsetWidth;
       const cardOffsetLeft = firstCard.offsetLeft;
 
-      // Center the card: card's left edge - half container + half card width
       const scrollPosition =
         cardOffsetLeft - containerWidth / 2 + cardWidth / 2;
 
-      // Smooth scroll only the container (not the page!)
       container.scrollTo({
-        left: Math.max(0, scrollPosition), // Ensure no negative scroll
+        left: Math.max(0, scrollPosition),
         behavior: "smooth",
       });
-    }, 150); // Slightly longer delay for smooth render
+    }, 150);
 
     return () => clearTimeout(timer);
-  }, []); // Empty dependency array = runs only on mount
+  }, []);
 
-  // Scroll animation refs for each section
   const quickAccessRef = useScrollAnimation();
   const mayorRef = useScrollAnimation();
   const factsRef = useScrollAnimation();
@@ -464,7 +448,7 @@ function Home() {
                            bg-white shadow-lg rounded-full p-3 w-12 h-12
                            hover:bg-gray-50 hover:shadow-xl
                            disabled:opacity-30 disabled:cursor-not-allowed
-                           transition-all duration-200 carousel-arrow"
+                           transition-all duration-200 carousel-arrow cursor-pointer"
                 aria-label="Previous announcement"
               >
                 <i className="fas fa-chevron-left text-primary text-lg"></i>
@@ -480,7 +464,7 @@ function Home() {
                            bg-white shadow-lg rounded-full p-3 w-12 h-12
                            hover:bg-gray-50 hover:shadow-xl
                            disabled:opacity-30 disabled:cursor-not-allowed
-                           transition-all duration-200 carousel-arrow"
+                           transition-all duration-200 carousel-arrow cursor-pointer"
                 aria-label="Next announcement"
               >
                 <i className="fas fa-chevron-right text-primary text-lg"></i>
@@ -506,8 +490,23 @@ function Home() {
                   <SkeletonCard />
                   <SkeletonCard />
                 </>
+              ) : posts.length === 0 ? (
+                // Show "No Posts Found" message when empty
+                <div className="flex-shrink-0 my-8 w-[90vw] md:w-[85vw] lg:w-[80vw] max-w-4xl snap-center flex flex-col bg-white rounded-lg shadow-lg overflow-hidden">
+                  <div className="p-12 flex flex-col items-center justify-center text-center">
+                    <i className="fas fa-inbox text-6xl text-gray-300 mb-4"></i>
+                    <h3 className="text-2xl font-bold text-gray-800 mb-3">
+                      No Posts Found
+                    </h3>
+                    <p className="text-gray-600 mb-6 max-w-md">
+                      There are currently no announcements available. Please
+                      check back later or visit our Facebook page for the latest
+                      updates.
+                    </p>
+                  </div>
+                </div>
               ) : (
-                // Show actual posts (dynamic or fallback)
+                // Show actual posts
                 posts.map((post, index) => (
                   <a
                     key={post.id}
@@ -578,7 +577,7 @@ function Home() {
             className={`text-center mt-12 scroll-animate stagger-4 ${announcementsRef.isVisible ? "visible" : ""}`}
           >
             <a
-              href={FACEBOOK_PAGE_URL}
+              href="https://www.facebook.com/MunicipalityOfTuy"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-6 py-3 bg-transparent border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-white transition-all shadow-md hover:shadow-lg"

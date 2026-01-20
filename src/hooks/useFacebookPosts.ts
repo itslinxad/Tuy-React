@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { getFacebookPosts } from "../services/facebook/client";
-import { facebookPosts } from "../data/facebookPosts";
 import type {
   FacebookPostData,
   UseFacebookPostsResult,
@@ -13,7 +12,7 @@ import type {
  * - Fetches posts from Facebook Graph API
  * - Uses localStorage cache (15 minutes by default)
  * - Shows loading state with skeleton loaders
- * - Falls back to static posts on error (silent)
+ * - Returns empty array when no posts available
  * - Logs errors to console for debugging
  *
  * @returns {UseFacebookPostsResult} Object containing posts, loading state, and error
@@ -53,24 +52,21 @@ export function useFacebookPosts(): UseFacebookPostsResult {
           const latestPosts = fetchedPosts.slice(0, 10);
           setPosts(latestPosts);
         } else {
-          // API returned empty, fall back to static posts
-          console.warn(
-            "[useFacebookPosts] API returned no posts, using static fallback",
-          );
-          setPosts(facebookPosts.slice(0, 4));
-          setError(new Error("No posts returned from API"));
+          // API returned empty, no posts to display
+          console.warn("[useFacebookPosts] API returned no posts");
+          setPosts([]);
+          // No error - empty is a valid state
         }
       } catch (err) {
-        // Silent fallback to static posts
+        // Return empty posts on error
         const errorMessage =
           err instanceof Error ? err.message : "Unknown error";
         console.error(
           "[useFacebookPosts] Failed to fetch posts:",
           errorMessage,
         );
-        console.log("[useFacebookPosts] Falling back to static posts");
 
-        setPosts(facebookPosts.slice(0, 4));
+        setPosts([]);
         setError(err instanceof Error ? err : new Error(errorMessage));
       } finally {
         setLoading(false);
