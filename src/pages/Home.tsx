@@ -122,9 +122,10 @@ function Home() {
       <section className="relative w-full h-[calc(100vh-4rem)] overflow-hidden">
         {/* Parallax Background Image */}
         <div
-          className="parallax-bg bg-[url('/hero-image.jpg')]"
+          className="parallax-bg"
           style={{
             transform: `translateY(${offset}px)`,
+            backgroundImage: `url('${import.meta.env.VITE_BASE_PATH}/hero-image.jpg')`,
           }}
         ></div>
 
@@ -308,7 +309,7 @@ function Home() {
               >
                 <img
                   className="w-64 h-64 rounded-full shrink-0 object-cover border-4 border-primary/20"
-                  src="/dev/mayor-photo.jpg"
+                  src={`${import.meta.env.VITE_BASE_PATH}/mayor-photo.jpg`}
                   alt="Municipal Mayor"
                 />
                 <div className="text-center">

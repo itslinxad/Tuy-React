@@ -5,7 +5,10 @@ const Gallery = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <Navbar />
-      <div className="relative w-full h-64 bg-cover bg-center bg-[url('hero-image.jpg')] bg-black/40 bg-blend-overlay">
+      <div 
+        className="relative w-full h-64 bg-cover bg-center bg-black/40 bg-blend-overlay"
+        style={{ backgroundImage: `url('${import.meta.env.VITE_BASE_PATH}/hero-image.jpg')` }}
+      >
         <div className="absolute inset-0 flex items-center justify-center">
           <h1 className="text-5xl font-bold text-white drop-shadow-2xl">Gallery</h1>
         </div>
