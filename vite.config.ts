@@ -4,10 +4,9 @@ import tailwindcss from "@tailwindcss/vite";
 import { readFileSync } from "fs";
 import { resolve } from "path";
 
-// https://vite.dev/config/
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '');
-  
+  const env = loadEnv(mode, process.cwd(), "");
+
   return {
     base: env.VITE_BASE_PATH,
     plugins: [
@@ -17,7 +16,6 @@ export default defineConfig(({ mode }) => {
         name: "root-redirect-plugin",
         configureServer(server) {
           server.middlewares.use((req, res, next) => {
-            // Serve under-construction.html at root
             if (req.url === "/") {
               const htmlPath = resolve(
                 __dirname,
@@ -37,5 +35,9 @@ export default defineConfig(({ mode }) => {
         },
       },
     ],
+    server: {
+      host: true,
+      port: 5173,
+    },
   };
 });

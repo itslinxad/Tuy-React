@@ -6,7 +6,7 @@
  */
 export default function SkeletonCard() {
   return (
-    <div className="flex-shrink-0 w-[90vw] md:w-[85vw] lg:w-[80vw] max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
+    <div className="flex-shrink-0 my-10 w-[90vw] md:w-[85vw] lg:w-[80vw] max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
       {/* Date header skeleton */}
       <div className="bg-gray-300 p-4 animate-pulse">
         <div className="flex items-center">
