@@ -1,8 +1,8 @@
-import "../assets/css/index.css";
+import "../../assets/css/index.css";
 import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar.tsx";
-import { useParallax } from "../hooks/useParallax";
-import { useScrollAnimation } from "../hooks/useScrollAnimation";
+import Navbar from "../../components/Navbar.tsx";
+import { useParallax } from "../../hooks/useParallax";
+import { useScrollAnimation } from "../../hooks/useScrollAnimation";
 
 const About = () => {
   // Parallax effect for hero section
@@ -153,15 +153,19 @@ const About = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30"></div>
 
         {/* Breadcrumb Navigation */}
-        <div className="absolute top-6 left-8 z-20">
-          <Link
-            to="/"
-            className="text-white/80 hover:text-white transition-colors"
-          >
-            Home
-          </Link>
-          <span className="text-white/60 mx-2">/</span>
-          <span className="text-white">About</span>
+        <div
+          className="absolute top-4 left-48 z-20 animate-fadeIn hidden md:block"
+          style={{ animationDelay: "0.2s" }}
+        >
+          <nav className="text-sm text-white/70 flex items-center">
+            <Link to="/">
+              <span className="hover:text-white/90 transition-colors cursor-pointer">
+                Home
+              </span>
+            </Link>
+            <i className="fas fa-chevron-right mx-2 text-xs"></i>
+            <span className="text-white/90">About</span>
+          </nav>
         </div>
 
         {/* Hero Content */}
@@ -407,9 +411,7 @@ const About = () => {
                 >
                   {/* Timeline Node */}
                   <div className="absolute left-5 w-7 h-7 rounded-full bg-primary border-4 border-white shadow-lg flex items-center justify-center">
-                    <i
-                      className={`fas ${item.icon} text-white text-xs`}
-                    ></i>
+                    <i className={`fas ${item.icon} text-white text-xs`}></i>
                   </div>
 
                   {/* Content */}
@@ -448,9 +450,7 @@ const About = () => {
                 } ${touristRef.isVisible ? "visible" : ""}`}
               >
                 <h3 className="text-xl font-bold text-primary mb-3 flex items-center">
-                  <i
-                    className={`fas ${attraction.icon} mr-3 text-2xl`}
-                  ></i>
+                  <i className={`fas ${attraction.icon} mr-3 text-2xl`}></i>
                   {attraction.title}
                 </h3>
                 <p className="text-gray-700 leading-relaxed">

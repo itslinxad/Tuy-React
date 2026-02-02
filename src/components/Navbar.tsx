@@ -233,6 +233,12 @@ const Navbar = () => {
                   >
                     Socio-Economic
                   </Link>
+                  <Link
+                    className="block px-6 py-3 text-black hover:bg-gray-100 transition-all duration-150"
+                    to="/profile/about"
+                  >
+                    About
+                  </Link>
                 </div>
               </li>
 

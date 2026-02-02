@@ -5,7 +5,7 @@ import { AuthProvider } from "./contexts/AuthContext.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import Login from "./pages/Login.tsx";
 import Home from "./pages/Home.tsx";
-import About from "./pages/About.tsx";
+import About from "./pages/profile/About.tsx";
 import History from "./pages/profile/History.tsx";
 import Demography from "./pages/profile/Demography.tsx";
 import Maps from "./pages/profile/Maps.tsx";
@@ -41,7 +41,7 @@ createRoot(document.getElementById("root")!).render(
             }
           />
           <Route
-            path="/about"
+            path="/profile/about"
             element={
               <ProtectedRoute>
                 <About />
