@@ -54,7 +54,6 @@ coverage
 Thumbs.db
 .AppleDouble
 .LSOverride
-*.sh
 
 # Debug
 *.tsbuildinfo
