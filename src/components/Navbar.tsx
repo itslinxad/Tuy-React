@@ -186,7 +186,7 @@ const Navbar = () => {
 
             {/* Desktop Menu Items */}
             <ul
-              className={`flex-row text-sm items-center justify-center text-white h-full ml-42 transition-opacity duration-300 ${
+              className={`flex-row text-sm items-center justify-center text-white h-full ml-42 transition-opacity duration-100 ${
                 isSearchOpen ? "hidden" : "hidden lg:flex"
               }`}
             >
@@ -208,7 +208,7 @@ const Navbar = () => {
                   <i className="fas fa-chevron-down ml-2 text-xs transition-transform duration-150 group-hover:rotate-180"></i>
                 </span>
                 <div className="absolute right-0 top-1/2 -translate-y-1/2 w-px h-8 bg-white/10"></div>
-                <div className="hidden group-hover:block absolute top-full left-0 bg-white min-w-[250px] shadow-2xl z-[100] animate-fadeIn">
+                <div className="hidden group-hover:block absolute top-full left-0 bg-white min-w-[250px] shadow-2xl z-[100] animate-fadeIn rounded-b-lg">
                   <Link
                     className="block px-6 py-3 text-black hover:bg-gray-100 transition-all duration-150"
                     to="/profile/history"
@@ -249,7 +249,7 @@ const Navbar = () => {
                   <i className="fas fa-chevron-down ml-2 text-xs transition-transform duration-150 group-hover:rotate-180"></i>
                 </span>
                 <div className="absolute right-0 top-1/2 -translate-y-1/2 w-px h-8 bg-white/10"></div>
-                <div className="hidden group-hover:block absolute top-full left-0 bg-white min-w-[250px] shadow-2xl z-[100] animate-fadeIn">
+                <div className="hidden group-hover:block absolute top-full left-0 bg-white min-w-[250px] shadow-2xl z-[100] animate-fadeIn rounded-b-lg">
                   <Link
                     className="block px-6 py-3 text-black hover:bg-gray-100 transition-all duration-150"
                     to="/government/officials"
@@ -278,7 +278,7 @@ const Navbar = () => {
                   <i className="fas fa-chevron-down ml-2 text-xs transition-transform duration-150 group-hover:rotate-180"></i>
                 </span>
                 <div className="absolute right-0 top-1/2 -translate-y-1/2 w-px h-8 bg-white/10"></div>
-                <div className="hidden group-hover:block absolute top-full left-0 bg-white min-w-[250px] shadow-2xl z-[100] animate-fadeIn">
+                <div className="hidden group-hover:block absolute top-full left-0 bg-white min-w-[250px] shadow-2xl z-[100] animate-fadeIn rounded-b-lg">
                   <Link
                     className="block px-6 py-3 text-black hover:bg-gray-100 transition-all duration-150"
                     to="/transparencies/accomplishment-reports"
@@ -313,7 +313,7 @@ const Navbar = () => {
                   <i className="fas fa-chevron-down ml-2 text-xs transition-transform duration-150 group-hover:rotate-180"></i>
                 </span>
                 <div className="absolute right-0 top-1/2 -translate-y-1/2 w-px h-8 bg-white/10"></div>
-                <div className="hidden group-hover:block absolute top-full left-0 bg-white min-w-[250px] shadow-2xl z-[100] animate-fadeIn">
+                <div className="hidden group-hover:block absolute top-full left-0 bg-white min-w-[250px] shadow-2xl z-[100] animate-fadeIn rounded-b-lg">
                   <Link
                     className="block px-6 py-3 text-black hover:bg-gray-100 transition-all duration-150"
                     to="/downloadables/forms"

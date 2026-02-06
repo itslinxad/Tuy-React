@@ -45,8 +45,9 @@
       .container {
         background: white;
         border-radius: 16px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-        max-width: 800px;
+        margin: 10px 0;
+        height: 100%;
+        max-width: 1000px;
         width: 100%;
         padding: 60px 40px;
         text-align: center;
@@ -64,10 +65,11 @@
         }
       }
 
-      .logo {
-        width: 120px;
-        height: 120px;
-        margin: 0 auto 30px;
+      .icon-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
       }
 
       @keyframes pulse {
@@ -80,16 +82,9 @@
         }
       }
 
-      .logo img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-      }
-
       .construction-icon {
         font-size: 80px;
         color: #01377d;
-        margin-bottom: 20px;
       }
 
       @keyframes bounce {
@@ -259,11 +254,6 @@
           font-size: 60px;
         }
 
-        .logo {
-          width: 100px;
-          height: 100px;
-        }
-
         .message {
           font-size: 1rem;
         }
@@ -299,16 +289,12 @@
   </head>
   <body>
     <div class="container">
-      <!-- Logo -->
-      <div class="logo">
-        <img src="/dev/logo.png" alt="Municipality of Tuy Logo" />
+      <div class="icon-container">
+        <!-- Construction Icon -->
+        <div class="construction-icon">
+          <i class="fas fa-tools"></i>
+        </div>
       </div>
-
-      <!-- Construction Icon -->
-      <div class="construction-icon">
-        <i class="fas fa-tools"></i>
-      </div>
-
       <!-- Main Heading -->
       <h1>Website Under Construction</h1>
       <p class="subtitle">Municipality of Tuy, Batangas</p>
