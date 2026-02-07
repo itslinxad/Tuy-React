@@ -234,7 +234,7 @@ const Navbar = () => {
                     Socio-Economic
                   </Link>
                   <Link
-                    className="block px-6 py-3 text-black hover:bg-gray-100 transition-all duration-150"
+                    className="block px-6 py-3 text-black rounded-b-lg hover:bg-gray-100 transition-all duration-150"
                     to="/profile/about"
                   >
                     About
@@ -263,7 +263,7 @@ const Navbar = () => {
                     Department Heads
                   </Link>
                   <Link
-                    className="block px-6 py-3 text-black hover:bg-gray-100 transition-all duration-150"
+                    className="block px-6 py-3 text-black rounded-b-lg hover:bg-gray-100 transition-all duration-150"
                     to="/government/barangay-officials"
                   >
                     Barangay Officials
@@ -298,7 +298,7 @@ const Navbar = () => {
                     Financial Statements
                   </Link>
                   <Link
-                    className="block px-6 py-3 text-black hover:bg-gray-100 transition-all duration-150"
+                    className="block px-6 py-3 text-black rounded-b-lg hover:bg-gray-100 transition-all duration-150"
                     to="/transparencies/invitation-to-bid"
                   >
                     Invitation to Bid
@@ -327,7 +327,7 @@ const Navbar = () => {
                     Resolutions
                   </Link>
                   <Link
-                    className="block px-6 py-3 text-black hover:bg-gray-100 transition-all duration-150"
+                    className="block px-6 py-3 text-black rounded-b-lg hover:bg-gray-100 transition-all duration-150"
                     to="/downloadables/ordinances"
                   >
                     Ordinances
