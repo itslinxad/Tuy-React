@@ -1,6 +1,7 @@
 import "../assets/css/index.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import emailjs from "@emailjs/browser";
 import Navbar from "../components/Navbar.tsx";
 import ContactMap from "../components/ContactMap.tsx";
 import { useParallax } from "../hooks/useParallax";
@@ -14,7 +15,7 @@ const ContactUs = () => {
   const emergencyRef = useScrollAnimation();
   const mapRef = useScrollAnimation();
 
-  // Form state (non-functional - visual only)
+  // Form state
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -22,17 +23,117 @@ const ContactUs = () => {
     subject: "",
     message: "",
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+
+  // Validation rules
+  const validateField = useCallback((name: string, value: string): string => {
+    switch (name) {
+      case "name":
+        if (!value.trim()) return "Full name is required";
+        if (value.trim().length < 2) return "Full name must be at least 2 characters";
+        return "";
+      case "email": {
+        if (!value.trim()) return "Email address is required";
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) return "Please enter a valid email address";
+        return "";
+      }
+      case "phone": {
+        if (!value.trim()) return ""; // Phone is optional
+        const phoneRegex = /^(\+639|09)\d{9}$/;
+        const cleaned = value.replace(/[\s-]/g, "");
+        if (!phoneRegex.test(cleaned)) return "Please enter a valid Philippine phone number (09XX XXX XXXX or +639XX XXX XXXX)";
+        return "";
+      }
+      case "subject":
+        if (!value) return "Please select a subject";
+        return "";
+      case "message":
+        if (!value.trim()) return "Message is required";
+        if (value.trim().length < 10) return "Message must be at least 10 characters";
+        return "";
+      default:
+        return "";
+    }
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Clear error on change if field was touched
+    if (touched[name]) {
+      const error = validateField(name, value);
+      setErrors((prev) => ({ ...prev, [name]: error }));
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    const error = validateField(name, value);
+    setErrors((prev) => ({ ...prev, [name]: error }));
+  };
+
+  const validateForm = (): boolean => {
+    const fields = ["name", "email", "phone", "subject", "message"] as const;
+    const newErrors: Record<string, string> = {};
+    const newTouched: Record<string, boolean> = {};
+    let isValid = true;
+
+    for (const field of fields) {
+      newTouched[field] = true;
+      const error = validateField(field, formData[field]);
+      newErrors[field] = error;
+      if (error) isValid = false;
+    }
+
+    setErrors(newErrors);
+    setTouched(newTouched);
+    return isValid;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Contact form is not yet connected to a backend. This is a visual template only.");
+    if (!validateForm()) return;
+
+    setFormStatus("submitting");
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          phone: formData.phone || "Not provided",
+          subject: formData.subject,
+          message: formData.message,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+      setFormStatus("success");
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+      setTouched({});
+      setErrors({});
+    } catch {
+      setFormStatus("error");
+    }
+  };
+
+  const resetForm = () => {
+    setFormStatus("idle");
+    setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+    setTouched({});
+    setErrors({});
+  };
+
+  // Helper to get input border class
+  const getInputBorderClass = (field: string) => {
+    if (errors[field] && touched[field]) return "border-red-500 focus:border-red-500";
+    if (!errors[field] && touched[field] && formData[field as keyof typeof formData]) return "border-green-500 focus:border-green-500";
+    return "border-gray-300 focus:border-primary";
   };
 
   const departments = [
@@ -297,124 +398,203 @@ const ContactUs = () => {
             <h2 className="text-4xl font-bold text-primary">Send Us a Message</h2>
           </div>
 
-          <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded mb-6">
-            <p className="text-yellow-800 text-sm flex items-start gap-2">
-              <i className="fas fa-info-circle mt-1"></i>
-              <span>
-                <strong>Note:</strong> This contact form is a visual template and not yet connected
-                to a backend system. For actual inquiries, please use the email addresses or phone
-                numbers provided above.
-              </span>
-            </p>
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Name */}
-              <div>
-                <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Full Name <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary"
-                  placeholder="Juan Dela Cruz"
-                />
+          {/* Success State */}
+          {formStatus === "success" && (
+            <div className="text-center py-12">
+              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i className="fas fa-check-circle text-green-600 text-4xl"></i>
               </div>
-
-              {/* Email */}
-              <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Email Address <span className="text-red-600">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary"
-                  placeholder="juan@example.com"
-                />
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Phone */}
-              <div>
-                <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary"
-                  placeholder="09XX XXX XXXX"
-                />
-              </div>
-
-              {/* Subject */}
-              <div>
-                <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Subject <span className="text-red-600">*</span>
-                </label>
-                <select
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary"
-                >
-                  <option value="">Select a subject</option>
-                  <option value="general">General Inquiry</option>
-                  <option value="complaint">Complaint</option>
-                  <option value="suggestion">Suggestion</option>
-                  <option value="assistance">Request for Assistance</option>
-                  <option value="business">Business Inquiry</option>
-                  <option value="tourism">Tourism Information</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-            </div>
-
-            {/* Message */}
-            <div>
-              <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-                Message <span className="text-red-600">*</span>
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleInputChange}
-                required
-                rows={6}
-                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-primary resize-none"
-                placeholder="Please type your message here..."
-              ></textarea>
-            </div>
-
-            {/* Submit Button */}
-            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">Message Sent Successfully!</h3>
+              <p className="text-gray-600 mb-8 max-w-md mx-auto">
+                Thank you for reaching out. We have received your message and will get back to you as soon as possible.
+              </p>
               <button
-                type="submit"
-                className="w-full md:w-auto px-8 py-4 bg-primary text-white rounded-lg font-bold text-lg hover:bg-primary-hover transition-colors flex items-center justify-center gap-2"
+                onClick={resetForm}
+                className="px-8 py-3 bg-primary text-white rounded-lg font-bold hover:bg-primary-hover transition-colors inline-flex items-center gap-2"
               >
-                <i className="fas fa-paper-plane"></i>
-                Send Message
+                <i className="fas fa-envelope"></i>
+                Send Another Message
               </button>
             </div>
-          </form>
+          )}
+
+          {/* Form (shown when not in success state) */}
+          {formStatus !== "success" && (
+            <>
+              {/* Error Banner */}
+              {formStatus === "error" && (
+                <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded mb-6">
+                  <p className="text-red-800 text-sm flex items-start gap-2">
+                    <i className="fas fa-exclamation-circle mt-1"></i>
+                    <span>
+                      <strong>Failed to send message.</strong> Please check your internet connection and try again. If the problem persists, please contact us using the phone numbers or email addresses above.
+                    </span>
+                  </p>
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Name */}
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Full Name <span className="text-red-600">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      disabled={formStatus === "submitting"}
+                      className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed ${getInputBorderClass("name")}`}
+                      placeholder="Juan Dela Cruz"
+                    />
+                    {errors.name && touched.name && (
+                      <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+                        <i className="fas fa-exclamation-circle text-xs"></i>
+                        {errors.name}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Email */}
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Email Address <span className="text-red-600">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      disabled={formStatus === "submitting"}
+                      className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed ${getInputBorderClass("email")}`}
+                      placeholder="juan@example.com"
+                    />
+                    {errors.email && touched.email && (
+                      <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+                        <i className="fas fa-exclamation-circle text-xs"></i>
+                        {errors.email}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Phone */}
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Phone Number <span className="text-gray-400 text-xs font-normal">(Optional)</span>
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      disabled={formStatus === "submitting"}
+                      className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed ${getInputBorderClass("phone")}`}
+                      placeholder="09XX XXX XXXX"
+                    />
+                    {errors.phone && touched.phone && (
+                      <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+                        <i className="fas fa-exclamation-circle text-xs"></i>
+                        {errors.phone}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Subject */}
+                  <div>
+                    <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Subject <span className="text-red-600">*</span>
+                    </label>
+                    <select
+                      id="subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      disabled={formStatus === "submitting"}
+                      className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed ${getInputBorderClass("subject")}`}
+                    >
+                      <option value="">Select a subject</option>
+                      <option value="General Inquiry">General Inquiry</option>
+                      <option value="Complaint">Complaint</option>
+                      <option value="Suggestion">Suggestion</option>
+                      <option value="Request for Assistance">Request for Assistance</option>
+                      <option value="Business Inquiry">Business Inquiry</option>
+                      <option value="Tourism Information">Tourism Information</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    {errors.subject && touched.subject && (
+                      <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+                        <i className="fas fa-exclamation-circle text-xs"></i>
+                        {errors.subject}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Message */}
+                <div>
+                  <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Message <span className="text-red-600">*</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    disabled={formStatus === "submitting"}
+                    rows={6}
+                    className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-colors resize-none disabled:bg-gray-100 disabled:cursor-not-allowed ${getInputBorderClass("message")}`}
+                    placeholder="Please type your message here..."
+                  ></textarea>
+                  <div className="flex justify-between items-center mt-1">
+                    <div>
+                      {errors.message && touched.message && (
+                        <p className="text-sm text-red-600 flex items-center gap-1">
+                          <i className="fas fa-exclamation-circle text-xs"></i>
+                          {errors.message}
+                        </p>
+                      )}
+                    </div>
+                    <p className={`text-xs ${formData.message.trim().length >= 10 ? "text-green-600" : "text-gray-400"}`}>
+                      {formData.message.trim().length} / 10 min characters
+                    </p>
+                  </div>
+                </div>
+
+                {/* Submit Button */}
+                <div>
+                  <button
+                    type="submit"
+                    disabled={formStatus === "submitting"}
+                    className="w-full md:w-auto px-8 py-4 bg-primary text-white rounded-lg font-bold text-lg hover:bg-primary-hover transition-colors flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                  >
+                    {formStatus === "submitting" ? (
+                      <>
+                        <i className="fas fa-spinner fa-spin"></i>
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <i className="fas fa-paper-plane"></i>
+                        Send Message
+                      </>
+                    )}
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
         </section>
 
         {/* Department Contacts */}

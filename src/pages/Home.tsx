@@ -166,7 +166,7 @@ function Home() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           <div
-            className={`bg-white shadow-lg rounded-lg p-6 sm:p-8 md:p-12 scroll-animate-left ${mayorRef.isVisible ? "visible" : ""}`}
+            className={`bg-white shadow-lg rounded-lg p-6 sm:p-8 md:p-12 scroll-animate ${mayorRef.isVisible ? "visible" : ""}`}
           >
             <div className="flex items-center mb-8 md:mb-12">
               <div className="w-2 h-10 sm:h-12 bg-primary mr-3 md:mr-4"></div>
@@ -275,7 +275,7 @@ function Home() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           <div
-            className={`flex items-center mb-8 md:mb-12 scroll-animate-left ${announcementsRef.isVisible ? "visible" : ""}`}
+            className={`flex items-center mb-8 md:mb-12 scroll-animate ${announcementsRef.isVisible ? "visible" : ""}`}
           >
             <div className="w-1.5 sm:w-2 h-12 sm:h-16 md:h-20 bg-primary mr-2 sm:mr-3 md:mr-4"></div>
             <div>
@@ -564,7 +564,7 @@ function Home() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           <div
-            className={`flex items-center mb-8 md:mb-12 scroll-animate-left ${exploreRef.isVisible ? "visible" : ""}`}
+            className={`flex items-center mb-8 md:mb-12 scroll-animate ${exploreRef.isVisible ? "visible" : ""}`}
           >
             <div className="w-1.5 sm:w-2 h-12 sm:h-16 md:h-20 bg-primary mr-2 sm:mr-3 md:mr-4"></div>
             <div>
@@ -580,7 +580,7 @@ function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {/* Gallery Preview */}
             <div
-              className={`md:col-span-2 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 md:p-8 flex flex-col h-full scroll-animate-left ${exploreRef.isVisible ? "visible" : ""}`}
+              className={`md:col-span-2 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 md:p-8 flex flex-col h-full scroll-animate ${exploreRef.isVisible ? "visible" : ""}`}
             >
               <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6 flex items-center">
                 <i className="fas fa-images text-primary mr-2 md:mr-3"></i>
@@ -619,7 +619,7 @@ function Home() {
 
             {/* Tourist Attractions */}
             <div
-              className={`bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 md:p-8 flex flex-col h-full scroll-animate-right ${exploreRef.isVisible ? "visible" : ""}`}
+              className={`bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 md:p-8 flex flex-col h-full scroll-animate ${exploreRef.isVisible ? "visible" : ""}`}
             >
               <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6 flex items-center">
                 <i className="fas fa-map-marked-alt text-primary mr-2 md:mr-3"></i>
