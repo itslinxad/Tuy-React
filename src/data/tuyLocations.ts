@@ -7,10 +7,11 @@ import type { MapMarker, MapConfig } from '../types/map.types';
 
 /**
  * Center coordinates for Tuy, Batangas (Municipal Hall)
+ * Updated with accurate GPS coordinates
  */
 export const TUY_CENTER = {
-  lat: 13.9983,
-  lng: 120.7250,
+  lat: 14.019133820661795,
+  lng: 120.73023066599163,
 };
 
 /**
@@ -96,7 +97,7 @@ export const tuyMarkers: MapMarker[] = [
   {
     id: 'municipal-hall',
     category: 'halls',
-    position: { lat: 13.9983, lng: 120.7250 },
+    position: { lat: 14.019133820661795, lng: 120.73023066599163 },
     title: 'Tuy Municipal Hall',
     address: 'Municipal Hall, Tuy, Batangas 4200',
     description: 'Main government center and administrative office of the Municipality of Tuy',
