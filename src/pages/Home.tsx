@@ -177,7 +177,7 @@ function Home() {
 
             <div className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8">
               <div
-                className={`flex flex-col items-center justify-center space-y-3 md:space-y-4 scroll-animate-scale ${mayorRef.isVisible ? "visible" : ""}`}
+                className={`flex flex-col items-center justify-center space-y-3 md:space-y-4 scroll-animate ${mayorRef.isVisible ? "visible" : ""}`}
               >
                 <img
                   className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full shrink-0 object-cover border-4 border-primary/20"
@@ -261,7 +261,7 @@ function Home() {
 
         {/* Map Container - full width */}
         <div
-          className={`relative h-[500px] md:h-[700px] w-full scroll-animate-scale ${factsRef.isVisible ? "visible" : ""}`}
+          className={`relative h-[500px] md:h-[700px] w-full scroll-animate ${factsRef.isVisible ? "visible" : ""}`}
         >
           <TuyMap />
         </div>
@@ -370,7 +370,7 @@ function Home() {
                     href={post.postUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`flex-shrink-0 my-8 w-[90vw] md:w-[85vw] lg:w-[80vw] max-w-4xl snap-center flex flex-col bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow scroll-animate-scale stagger-${index + 1} ${announcementsRef.isVisible ? "visible" : ""}`}
+                    className={`flex-shrink-0 my-8 w-[90vw] md:w-[85vw] lg:w-[80vw] max-w-4xl snap-center flex flex-col bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow scroll-animate stagger-${index + 1} ${announcementsRef.isVisible ? "visible" : ""}`}
                   >
                     {/* Date header */}
                     <div className="bg-primary p-4">
@@ -466,7 +466,7 @@ function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             {/* Health Services */}
             <div
-              className={`bg-white border-2 border-gray-200 rounded-lg p-5 md:p-6 text-center hover:border-primary hover:shadow-xl transition-all scroll-animate-scale stagger-1 ${servicesRef.isVisible ? "visible" : ""}`}
+              className={`bg-white border-2 border-gray-200 rounded-lg p-5 md:p-6 text-center hover:border-primary hover:shadow-xl transition-all scroll-animate stagger-1 ${servicesRef.isVisible ? "visible" : ""}`}
             >
               <div className="w-16 h-16 md:w-20 md:h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
                 <i className="fas fa-clinic-medical text-3xl md:text-4xl text-primary"></i>
@@ -481,7 +481,7 @@ function Home() {
 
             {/* Education */}
             <div
-              className={`bg-white border-2 border-gray-200 rounded-lg p-5 md:p-6 text-center hover:border-primary hover:shadow-xl transition-all scroll-animate-scale stagger-2 ${servicesRef.isVisible ? "visible" : ""}`}
+              className={`bg-white border-2 border-gray-200 rounded-lg p-5 md:p-6 text-center hover:border-primary hover:shadow-xl transition-all scroll-animate stagger-2 ${servicesRef.isVisible ? "visible" : ""}`}
             >
               <div className="w-16 h-16 md:w-20 md:h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
                 <i className="fas fa-graduation-cap text-3xl md:text-4xl text-primary"></i>
@@ -496,7 +496,7 @@ function Home() {
 
             {/* Business & Permits */}
             <div
-              className={`bg-white border-2 border-gray-200 rounded-lg p-5 md:p-6 text-center hover:border-primary hover:shadow-xl transition-all scroll-animate-scale stagger-3 ${servicesRef.isVisible ? "visible" : ""}`}
+              className={`bg-white border-2 border-gray-200 rounded-lg p-5 md:p-6 text-center hover:border-primary hover:shadow-xl transition-all scroll-animate stagger-3 ${servicesRef.isVisible ? "visible" : ""}`}
             >
               <div className="w-16 h-16 md:w-20 md:h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
                 <i className="fas fa-briefcase text-3xl md:text-4xl text-primary"></i>
@@ -511,7 +511,7 @@ function Home() {
 
             {/* Social Welfare */}
             <div
-              className={`bg-white border-2 border-gray-200 rounded-lg p-5 md:p-6 text-center hover:border-primary hover:shadow-xl transition-all scroll-animate-scale stagger-4 ${servicesRef.isVisible ? "visible" : ""}`}
+              className={`bg-white border-2 border-gray-200 rounded-lg p-5 md:p-6 text-center hover:border-primary hover:shadow-xl transition-all scroll-animate stagger-4 ${servicesRef.isVisible ? "visible" : ""}`}
             >
               <div className="w-16 h-16 md:w-20 md:h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
                 <i className="fas fa-hands-helping text-3xl md:text-4xl text-primary"></i>
@@ -526,7 +526,7 @@ function Home() {
 
             {/* Infrastructure */}
             <div
-              className={`bg-white border-2 border-gray-200 rounded-lg p-5 md:p-6 text-center hover:border-primary hover:shadow-xl transition-all scroll-animate-scale stagger-5 ${servicesRef.isVisible ? "visible" : ""}`}
+              className={`bg-white border-2 border-gray-200 rounded-lg p-5 md:p-6 text-center hover:border-primary hover:shadow-xl transition-all scroll-animate stagger-5 ${servicesRef.isVisible ? "visible" : ""}`}
             >
               <div className="w-16 h-16 md:w-20 md:h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
                 <i className="fas fa-road text-3xl md:text-4xl text-primary"></i>
@@ -541,7 +541,7 @@ function Home() {
 
             {/* Environment */}
             <div
-              className={`bg-white border-2 border-gray-200 rounded-lg p-5 md:p-6 text-center hover:border-primary hover:shadow-xl transition-all scroll-animate-scale stagger-6 ${servicesRef.isVisible ? "visible" : ""}`}
+              className={`bg-white border-2 border-gray-200 rounded-lg p-5 md:p-6 text-center hover:border-primary hover:shadow-xl transition-all scroll-animate stagger-6 ${servicesRef.isVisible ? "visible" : ""}`}
             >
               <div className="w-16 h-16 md:w-20 md:h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
                 <i className="fas fa-leaf text-3xl md:text-4xl text-primary"></i>
@@ -699,7 +699,7 @@ function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-12">
             {/* Address */}
             <div
-              className={`text-center scroll-animate-scale stagger-1 ${contactRef.isVisible ? "visible" : ""}`}
+              className={`text-center scroll-animate stagger-1 ${contactRef.isVisible ? "visible" : ""}`}
             >
               <div className="w-14 h-14 md:w-16 md:h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
                 <i className="fas fa-map-pin text-2xl md:text-3xl"></i>
@@ -715,7 +715,7 @@ function Home() {
 
             {/* Contact */}
             <div
-              className={`text-center scroll-animate-scale stagger-2 ${contactRef.isVisible ? "visible" : ""}`}
+              className={`text-center scroll-animate stagger-2 ${contactRef.isVisible ? "visible" : ""}`}
             >
               <div className="w-14 h-14 md:w-16 md:h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
                 <i className="fas fa-phone text-2xl md:text-3xl"></i>
@@ -731,7 +731,7 @@ function Home() {
 
             {/* Office Hours */}
             <div
-              className={`text-center scroll-animate-scale stagger-3 ${contactRef.isVisible ? "visible" : ""}`}
+              className={`text-center scroll-animate stagger-3 ${contactRef.isVisible ? "visible" : ""}`}
             >
               <div className="w-14 h-14 md:w-16 md:h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
                 <i className="fas fa-clock text-2xl md:text-3xl"></i>

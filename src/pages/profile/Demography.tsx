@@ -436,7 +436,7 @@ const Demography = () => {
         {/* Population Statistics Dashboard */}
         <section
           ref={statsRef.elementRef}
-          className={`bg-gradient-to-br from-primary to-primary-hover py-12 rounded-lg shadow-xl scroll-animate-scale ${
+          className={`bg-gradient-to-br from-primary to-primary-hover py-12 rounded-lg shadow-xl scroll-animate ${
             statsRef.isVisible ? "visible" : ""
           }`}
         >
@@ -448,7 +448,7 @@ const Demography = () => {
             {populationStats.map((stat, index) => (
               <div
                 key={index}
-                className={`text-center scroll-animate-scale stagger-${
+                className={`text-center scroll-animate stagger-${
                   index + 1
                 } ${statsRef.isVisible ? "visible" : ""}`}
               >
@@ -554,7 +554,7 @@ const Demography = () => {
             {populationTrends.map((trend, index) => (
               <div
                 key={index}
-                className={`bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg p-6 hover:shadow-lg transition-all scroll-animate-scale stagger-${
+                className={`bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg p-6 hover:shadow-lg transition-all scroll-animate stagger-${
                   (index % 3) + 1
                 } ${trendsRef.isVisible ? "visible" : ""}`}
               >
@@ -600,7 +600,7 @@ const Demography = () => {
             {householdStats.map((stat, index) => (
               <div
                 key={index}
-                className={`bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-all scroll-animate-scale stagger-${
+                className={`bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-all scroll-animate stagger-${
                   index + 1
                 } ${householdRef.isVisible ? "visible" : ""}`}
               >
@@ -640,7 +640,7 @@ const Demography = () => {
             {languageEthnicity.map((category, catIndex) => (
               <div
                 key={catIndex}
-                className={`bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-6 scroll-animate-scale stagger-${
+                className={`bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-6 scroll-animate stagger-${
                   catIndex + 1
                 } ${languageRef.isVisible ? "visible" : ""}`}
               >
@@ -686,7 +686,7 @@ const Demography = () => {
         {/* Religious Demographics Section */}
         <section
           ref={religionRef.elementRef}
-          className={`bg-gradient-to-br from-primary to-primary-hover py-12 rounded-lg shadow-xl scroll-animate-scale ${
+          className={`bg-gradient-to-br from-primary to-primary-hover py-12 rounded-lg shadow-xl scroll-animate ${
             religionRef.isVisible ? "visible" : ""
           }`}
         >
@@ -702,7 +702,7 @@ const Demography = () => {
               {religiousDemographics.map((religion, index) => (
                 <div
                   key={index}
-                  className={`bg-white rounded-lg p-6 hover:shadow-lg transition-all scroll-animate-scale stagger-${
+                  className={`bg-white rounded-lg p-6 hover:shadow-lg transition-all scroll-animate stagger-${
                     (index % 5) + 1
                   } ${religionRef.isVisible ? "visible" : ""}`}
                 >

@@ -473,7 +473,7 @@ const SocioEconomic = () => {
         {/* Economic Indicators Dashboard */}
         <section
           ref={indicatorsRef.elementRef}
-          className={`bg-gradient-to-br from-primary to-primary-hover py-12 rounded-lg shadow-xl scroll-animate-scale ${
+          className={`bg-gradient-to-br from-primary to-primary-hover py-12 rounded-lg shadow-xl scroll-animate ${
             indicatorsRef.isVisible ? "visible" : ""
           }`}
         >
@@ -485,7 +485,7 @@ const SocioEconomic = () => {
             {economicIndicators.map((indicator, index) => (
               <div
                 key={index}
-                className={`bg-white rounded-lg p-6 hover:shadow-xl transition-all scroll-animate-scale stagger-${
+                className={`bg-white rounded-lg p-6 hover:shadow-xl transition-all scroll-animate stagger-${
                   index + 1
                 } ${indicatorsRef.isVisible ? "visible" : ""}`}
               >
@@ -598,7 +598,7 @@ const SocioEconomic = () => {
             {employmentStats.map((stat, index) => (
               <div
                 key={index}
-                className={`bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg p-6 hover:shadow-md transition-all scroll-animate-scale stagger-${
+                className={`bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg p-6 hover:shadow-md transition-all scroll-animate stagger-${
                   index + 1
                 } ${employmentRef.isVisible ? "visible" : ""}`}
               >
@@ -699,7 +699,7 @@ const SocioEconomic = () => {
             {educationFacilities.map((facility, index) => (
               <div
                 key={index}
-                className={`bg-white rounded-lg p-6 hover:shadow-lg transition-all scroll-animate-scale stagger-${
+                className={`bg-white rounded-lg p-6 hover:shadow-lg transition-all scroll-animate stagger-${
                   (index % 2) + 1
                 } ${educationRef.isVisible ? "visible" : ""}`}
               >
@@ -838,7 +838,7 @@ const SocioEconomic = () => {
         {/* Business & Investment Section */}
         <section
           ref={businessRef.elementRef}
-          className={`bg-gradient-to-br from-primary to-primary-hover py-12 rounded-lg shadow-xl scroll-animate-scale ${
+          className={`bg-gradient-to-br from-primary to-primary-hover py-12 rounded-lg shadow-xl scroll-animate ${
             businessRef.isVisible ? "visible" : ""
           }`}
         >
@@ -854,7 +854,7 @@ const SocioEconomic = () => {
               {businessEnvironment.map((item, index) => (
                 <div
                   key={index}
-                  className={`bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all scroll-animate-scale stagger-${
+                  className={`bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all scroll-animate stagger-${
                     (index % 2) + 1
                   } ${businessRef.isVisible ? "visible" : ""}`}
                 >

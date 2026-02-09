@@ -359,7 +359,7 @@ const DepartmentHeads = () => {
             {executiveOffices.map((dept, index) => (
               <div
                 key={index}
-                className={`bg-gray-50 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden scroll-animate-scale stagger-${
+                className={`bg-gray-50 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden scroll-animate stagger-${
                   (index % 3) + 1
                 } ${executiveRef.isVisible ? "visible" : ""}`}
               >
@@ -430,7 +430,7 @@ const DepartmentHeads = () => {
             {supportServices.map((dept, index) => (
               <div
                 key={index}
-                className={`bg-gray-50 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden scroll-animate-scale stagger-${
+                className={`bg-gray-50 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden scroll-animate stagger-${
                   (index % 3) + 1
                 } ${supportRef.isVisible ? "visible" : ""}`}
               >
@@ -508,7 +508,7 @@ const DepartmentHeads = () => {
             {operationalDepartments.map((dept, index) => (
               <div
                 key={index}
-                className={`bg-gray-50 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden scroll-animate-scale stagger-${
+                className={`bg-gray-50 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden scroll-animate stagger-${
                   (index % 3) + 1
                 } ${operationalRef.isVisible ? "visible" : ""}`}
               >

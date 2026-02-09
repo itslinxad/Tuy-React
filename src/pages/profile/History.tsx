@@ -445,7 +445,7 @@ const History = () => {
             {keyHistoricalEvents.map((event, index) => (
               <div
                 key={index}
-                className={`bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-all duration-300 scroll-animate-scale stagger-${
+                className={`bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-all duration-300 scroll-animate stagger-${
                   (index % 3) + 1
                 } ${eventsRef.isVisible ? "visible" : ""}`}
               >
@@ -473,7 +473,7 @@ const History = () => {
         {/* Notable Historical Figures Section */}
         <section
           ref={figuresRef.elementRef}
-          className={`bg-gradient-to-br from-primary to-primary-hover py-12 rounded-lg shadow-xl scroll-animate-scale ${
+          className={`bg-gradient-to-br from-primary to-primary-hover py-12 rounded-lg shadow-xl scroll-animate ${
             figuresRef.isVisible ? "visible" : ""
           }`}
         >
@@ -489,7 +489,7 @@ const History = () => {
               {notableFigures.map((figure, index) => (
                 <div
                   key={index}
-                  className={`bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all duration-300 scroll-animate-scale stagger-${
+                  className={`bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all duration-300 scroll-animate stagger-${
                     (index % 2) + 1
                   } ${figuresRef.isVisible ? "visible" : ""}`}
                 >

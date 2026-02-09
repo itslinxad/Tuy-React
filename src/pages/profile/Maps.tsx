@@ -580,7 +580,7 @@ const Maps = () => {
         {/* Points of Interest Section */}
         <section
           ref={poiRef.elementRef}
-          className={`bg-gradient-to-br from-primary to-primary-hover py-12 rounded-lg shadow-xl scroll-animate-scale ${
+          className={`bg-gradient-to-br from-primary to-primary-hover py-12 rounded-lg shadow-xl scroll-animate ${
             poiRef.isVisible ? "visible" : ""
           }`}
         >
@@ -596,7 +596,7 @@ const Maps = () => {
               {pointsOfInterest.map((category, catIndex) => (
                 <div
                   key={catIndex}
-                  className={`bg-white rounded-lg p-6 scroll-animate-scale stagger-${
+                  className={`bg-white rounded-lg p-6 scroll-animate stagger-${
                     catIndex + 1
                   } ${poiRef.isVisible ? "visible" : ""}`}
                 >
@@ -715,7 +715,7 @@ const Maps = () => {
             {landUse.map((use, index) => (
               <div
                 key={index}
-                className={`bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-all scroll-animate-scale stagger-${
+                className={`bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-all scroll-animate stagger-${
                   (index % 3) + 1
                 } ${landUseRef.isVisible ? "visible" : ""}`}
               >

@@ -353,7 +353,7 @@ const About = () => {
         {/* Statistics Section - NEW */}
         <section
           ref={statsRef.elementRef}
-          className={`bg-gradient-to-br from-primary to-primary-hover py-12 rounded-lg shadow-xl scroll-animate-scale ${
+          className={`bg-gradient-to-br from-primary to-primary-hover py-12 rounded-lg shadow-xl scroll-animate ${
             statsRef.isVisible ? "visible" : ""
           }`}
         >
@@ -365,7 +365,7 @@ const About = () => {
             {statistics.map((stat, index) => (
               <div
                 key={index}
-                className={`text-center scroll-animate-scale stagger-${
+                className={`text-center scroll-animate stagger-${
                   index + 1
                 } ${statsRef.isVisible ? "visible" : ""}`}
               >
@@ -445,7 +445,7 @@ const About = () => {
             {touristAttractions.map((attraction, index) => (
               <div
                 key={index}
-                className={`bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-all duration-300 scroll-animate-scale stagger-${
+                className={`bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-all duration-300 scroll-animate stagger-${
                   (index % 4) + 1
                 } ${touristRef.isVisible ? "visible" : ""}`}
               >

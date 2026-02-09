@@ -470,7 +470,7 @@ const Officials = () => {
             {sanggunianMembers.map((member, index) => (
               <div
                 key={index}
-                className={`bg-gray-50 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden scroll-animate-scale stagger-${
+                className={`bg-gray-50 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden scroll-animate stagger-${
                   (index % 4) + 1
                 } ${councilorsRef.isVisible ? "visible" : ""}`}
               >
@@ -515,7 +515,7 @@ const Officials = () => {
         {/* Ex-Officio Members Section */}
         <section
           ref={exOfficioRef.elementRef}
-          className={`bg-gradient-to-br from-primary to-primary-hover py-12 rounded-lg shadow-xl scroll-animate-scale ${
+          className={`bg-gradient-to-br from-primary to-primary-hover py-12 rounded-lg shadow-xl scroll-animate ${
             exOfficioRef.isVisible ? "visible" : ""
           }`}
         >
@@ -532,7 +532,7 @@ const Officials = () => {
               {exOfficioMembers.map((member, index) => (
                 <div
                   key={index}
-                  className={`bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-all scroll-animate-scale stagger-${
+                  className={`bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-all scroll-animate stagger-${
                     index + 1
                   } ${exOfficioRef.isVisible ? "visible" : ""}`}
                 >
