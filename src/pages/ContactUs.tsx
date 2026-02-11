@@ -346,7 +346,7 @@ const ContactUs = () => {
               <p className="text-gray-700">
                 <strong>General Inquiries:</strong>
                 <br />
-                REPLACE: info@tuy.gov.ph
+                REPLACE: info@tuybatangas.gov.ph
                 <br />
                 <br />
                 <strong>Complaints/Feedback:</strong>

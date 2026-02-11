@@ -725,7 +725,7 @@ function Home() {
                 Phone: (043) XXX-XXXX
               </p>
               <p className="text-sm md:text-base text-white/90">
-                Email: info@tuy.gov.ph
+                Email: info@tuybatangas.gov.ph
               </p>
             </div>
 
